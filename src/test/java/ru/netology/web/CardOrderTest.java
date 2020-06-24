@@ -1,35 +1,24 @@
 package ru.netology.web;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
-import com.github.javafaker.Faker;
-import org.junit.jupiter.api.Test;
-import org.openqa.selenium.Keys;
 
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.withText;
-import static com.codeborne.selenide.Selenide.*;
-import static org.openqa.selenium.By.cssSelector;
+import org.junit.jupiter.api.Test;
 
 public class CardOrderTest {
 
     PageObject page = new PageObject();
 
     private DataCreator dataCreator = new DataCreator();
-    private String City = dataCreator.getCity();
-    private String Name = dataCreator.getFullName();
-    private String Phone = dataCreator.getPhone();
+    private String city = dataCreator.getCity();
+    private String name = dataCreator.getFullName();
+    private String phone = dataCreator.getPhone();
 
-    private String FirstDate = dataCreator.getDate(3);
-    private String SecondDate = dataCreator.getDate(5);
-    private String InvalidDate = dataCreator.getDate(0);
 
     @Test
     void shouldSendRequest() {
-        page.setCity(City);
-        page.setDate(FirstDate);
-        page.setFullName(Name);
-        page.setPhone(Phone);
+        page.setCity(city);
+        page.setDate(dataCreator.getDate(3));
+        page.setFullName(name);
+        page.setPhone(phone);
         page.agreeWithConditions();
         page.apply();
         page.verifyPopup("Успешно!");
@@ -37,15 +26,15 @@ public class CardOrderTest {
 
     @Test
     void shouldConfirmWhenDateChanged() {
-        page.setCity(City);
-        page.setDate(FirstDate);
-        page.setFullName(Name);
-        page.setPhone(Phone);
+        page.setCity(city);
+        page.setDate(dataCreator.getDate(3));
+        page.setFullName(name);
+        page.setPhone(phone);
         page.agreeWithConditions();
         page.apply();
         page.verifyPopup("Успешно!");
 
-        page.setDate(SecondDate);
+        page.setDate(dataCreator.getDate(5));
         page.apply();
         page.confirm();
         page.verifyPopup("Успешно!");
@@ -55,15 +44,15 @@ public class CardOrderTest {
     @Test
     void shouldNotGiveNewDateWhenInvalidDate() {
 
-        page.setCity(City);
-        page.setDate(FirstDate);
-        page.setFullName(Name);
-        page.setPhone(Phone);
+        page.setCity(city);
+        page.setDate(dataCreator.getDate(3));
+        page.setFullName(name);
+        page.setPhone(phone);
         page.agreeWithConditions();
         page.apply();
         page.verifyPopup("Успешно!");
 
-        page.setDate(InvalidDate);
+        page.setDate(dataCreator.getDate(0));
         page.apply();
         page.verifyWarning("Заказ на выбранную дату невозможен");
     }
@@ -71,9 +60,9 @@ public class CardOrderTest {
     @Test
     void shouldShowWarningForWrongCity() {
         page.setCity("Кисловодск");
-        page.setDate(FirstDate);
-        page.setFullName(Name);
-        page.setPhone(Phone);
+        page.setDate(dataCreator.getDate(3));
+        page.setFullName(name);
+        page.setPhone(phone);
         page.agreeWithConditions();
         page.apply();
         page.verifyWarning("Доставка в выбранный город недоступна");

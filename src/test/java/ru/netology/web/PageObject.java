@@ -21,13 +21,11 @@ public class PageObject {
     }
 
     public void setCity(String city) {
-        form.$(cssSelector("[data-test-id=city] input")).sendKeys(Keys.chord(Keys.CONTROL, "a"));
         form.$(cssSelector("[data-test-id=city] input")).doubleClick().sendKeys(Keys.DELETE);
         form.$(cssSelector("[data-test-id=city] input")).sendKeys(city);
     }
 
     public void setDate(String date) {
-        form.$(cssSelector("[data-test-id=date] input")).sendKeys(Keys.chord(Keys.CONTROL, "a"));
         form.$(cssSelector("[data-test-id=date] input")).doubleClick().sendKeys(Keys.DELETE);
         form.$(cssSelector("[data-test-id=date] input")).sendKeys(date);
     }

@@ -24,12 +24,9 @@ public class DataCreator {
     }
 
     public static String getDate(int dayFromToday) {
-        LocalDate today = LocalDate.now();
-        LocalDate date = today.plusDays(dayFromToday);
 
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        return LocalDate.now().plusDays(dayFromToday).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
 
-        return date.format(format);
     }
 
     public static String getCity() {
