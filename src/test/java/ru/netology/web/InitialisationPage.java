@@ -10,12 +10,12 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static org.openqa.selenium.By.cssSelector;
 
-public class PageObject {
+public class InitialisationPage {
 
     private SelenideElement form;
 
 
-    PageObject() {
+    InitialisationPage() {
         open("http://localhost:9999");
         form = $("[action]");
     }

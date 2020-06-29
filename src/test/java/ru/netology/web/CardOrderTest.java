@@ -5,18 +5,17 @@ import org.junit.jupiter.api.Test;
 
 public class CardOrderTest {
 
-    PageObject page = new PageObject();
+    InitialisationPage page = new InitialisationPage();
 
-    private DataCreator dataCreator = new DataCreator();
-    private String city = dataCreator.getCity();
-    private String name = dataCreator.getFullName();
-    private String phone = dataCreator.getPhone();
+    private String city = DataCreator.getCity();
+    private String name = DataCreator.getFullName();
+    private String phone = DataCreator.getPhone();
 
 
     @Test
     void shouldSendRequest() {
         page.setCity(city);
-        page.setDate(dataCreator.getDate(3));
+        page.setDate(DataCreator.getDate(3));
         page.setFullName(name);
         page.setPhone(phone);
         page.agreeWithConditions();
@@ -27,14 +26,14 @@ public class CardOrderTest {
     @Test
     void shouldConfirmWhenDateChanged() {
         page.setCity(city);
-        page.setDate(dataCreator.getDate(3));
+        page.setDate(DataCreator.getDate(3));
         page.setFullName(name);
         page.setPhone(phone);
         page.agreeWithConditions();
         page.apply();
         page.verifyPopup("Успешно!");
 
-        page.setDate(dataCreator.getDate(5));
+        page.setDate(DataCreator.getDate(5));
         page.apply();
         page.confirm();
         page.verifyPopup("Успешно!");
@@ -45,14 +44,14 @@ public class CardOrderTest {
     void shouldNotGiveNewDateWhenInvalidDate() {
 
         page.setCity(city);
-        page.setDate(dataCreator.getDate(3));
+        page.setDate(DataCreator.getDate(3));
         page.setFullName(name);
         page.setPhone(phone);
         page.agreeWithConditions();
         page.apply();
         page.verifyPopup("Успешно!");
 
-        page.setDate(dataCreator.getDate(0));
+        page.setDate(DataCreator.getDate(0));
         page.apply();
         page.verifyWarning("Заказ на выбранную дату невозможен");
     }
@@ -60,7 +59,7 @@ public class CardOrderTest {
     @Test
     void shouldShowWarningForWrongCity() {
         page.setCity("Кисловодск");
-        page.setDate(dataCreator.getDate(3));
+        page.setDate(DataCreator.getDate(3));
         page.setFullName(name);
         page.setPhone(phone);
         page.agreeWithConditions();
