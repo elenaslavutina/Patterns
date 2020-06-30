@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 public class CardOrderTest {
 
-    InitialisationPage page = new InitialisationPage();
+    InitialisationPage pageOrder = new InitialisationPage();
 
     private String city = DataCreator.getCity();
     private String name = DataCreator.getFullName();
@@ -14,56 +14,56 @@ public class CardOrderTest {
 
     @Test
     void shouldSendRequest() {
-        page.setCity(city);
-        page.setDate(DataCreator.getDate(3));
-        page.setFullName(name);
-        page.setPhone(phone);
-        page.agreeWithConditions();
-        page.apply();
-        page.verifyPopup("Успешно!");
+        pageOrder.setCity(city);
+        pageOrder.setDate(DataCreator.getDate(3));
+        pageOrder.setFullName(name);
+        pageOrder.setPhone(phone);
+        pageOrder.agreeWithConditions();
+        pageOrder.apply();
+        pageOrder.verifyPopup("Успешно!");
     }
 
     @Test
     void shouldConfirmWhenDateChanged() {
-        page.setCity(city);
-        page.setDate(DataCreator.getDate(3));
-        page.setFullName(name);
-        page.setPhone(phone);
-        page.agreeWithConditions();
-        page.apply();
-        page.verifyPopup("Успешно!");
+        pageOrder.setCity(city);
+        pageOrder.setDate(DataCreator.getDate(3));
+        pageOrder.setFullName(name);
+        pageOrder.setPhone(phone);
+        pageOrder.agreeWithConditions();
+        pageOrder.apply();
+        pageOrder.verifyPopup("Успешно!");
 
-        page.setDate(DataCreator.getDate(5));
-        page.apply();
-        page.confirm();
-        page.verifyPopup("Успешно!");
+        pageOrder.setDate(DataCreator.getDate(5));
+        pageOrder.apply();
+        pageOrder.confirm();
+        pageOrder.verifyPopup("Успешно!");
 
     }
 
     @Test
     void shouldNotGiveNewDateWhenInvalidDate() {
 
-        page.setCity(city);
-        page.setDate(DataCreator.getDate(3));
-        page.setFullName(name);
-        page.setPhone(phone);
-        page.agreeWithConditions();
-        page.apply();
-        page.verifyPopup("Успешно!");
+        pageOrder.setCity(city);
+        pageOrder.setDate(DataCreator.getDate(3));
+        pageOrder.setFullName(name);
+        pageOrder.setPhone(phone);
+        pageOrder.agreeWithConditions();
+        pageOrder.apply();
+        pageOrder.verifyPopup("Успешно!");
 
-        page.setDate(DataCreator.getDate(0));
-        page.apply();
-        page.verifyWarning("Заказ на выбранную дату невозможен");
+        pageOrder.setDate(DataCreator.getDate(0));
+        pageOrder.apply();
+        pageOrder.verifyWarning("Заказ на выбранную дату невозможен");
     }
 
     @Test
     void shouldShowWarningForWrongCity() {
-        page.setCity("Кисловодск");
-        page.setDate(DataCreator.getDate(3));
-        page.setFullName(name);
-        page.setPhone(phone);
-        page.agreeWithConditions();
-        page.apply();
-        page.verifyWarning("Доставка в выбранный город недоступна");
+        pageOrder.setCity("Кисловодск");
+        pageOrder.setDate(DataCreator.getDate(3));
+        pageOrder.setFullName(name);
+        pageOrder.setPhone(phone);
+        pageOrder.agreeWithConditions();
+        pageOrder.apply();
+        pageOrder.verifyWarning("Доставка в выбранный город недоступна");
     }
 }
